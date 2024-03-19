@@ -1,8 +1,6 @@
-const fs = require("fs");
-
-function renderPage() {
+function renderPage(response) {
     response.setHeader("Content-Type", "text/html");
-    response.write("<html>");
+    response.write(`<html lang="pl">`);
     response.write(`
     <head>
         <meta charset="UFT-8">
@@ -13,12 +11,12 @@ function renderPage() {
     response.write(`
     <body>
         <h1>Student profile</h1>
-        <p>Numer: ${code}</p>
-        <p>Name: ${name}</p>
-        <p>Last Name: ${lastname}</p>
-        <p>Gender: ${gender}</p>
-        <p>Age: ${age}</p>
-        <p>Study Field: ${studyfiled}</p>
+        <p>Code: </p>
+        <p>Name: </p>
+        <p>Last name: </p>
+        <p>Gender: </p>
+        <p>Age: </p>
+        <p>Study field: </p>
     </body>
     `);
     response.write("</html>");
