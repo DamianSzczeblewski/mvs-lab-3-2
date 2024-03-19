@@ -1,6 +1,6 @@
-function renderPage() {
+function renderPage(response) {
     response.setHeader("Content-Type", "text/html");
-    response.write("<html>");
+    response.write(`<html lang="pl">`);
     response.write(`
     <head>
         <meta charset="UFT-8">
