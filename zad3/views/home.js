@@ -1,6 +1,6 @@
-function renderPage() {
+function renderPage(response) {
     response.setHeader("Content-Type", "text/html");
-    response.write("<html>");
+    response.write(`<html lang="pl">`);
     response.write(`
     <head>
         <meta charset="UFT-8">
@@ -11,17 +11,17 @@ function renderPage() {
     response.write(`
     <body>
         <form action="/student" method="POST">
-            <input type="text" name="name"/>
-            <input type="text" name="lastname"/>
-            <input type="text" name="age"/>
-            <select name="gender">
-                <option>male</option>
-                <option>female</option>
-                <option>other</option>
-            </select>
-            <input type="number" name="code"/>
-            <input type="text" name="studyField"/>
-            <button>Send</button>
+        <input type="text" name="name"/>
+        <input type="text" name="lastname"/>
+        <input type="number" name="age"/>
+        <select name="gender">
+            <option>male</option>
+            <option>female</option>
+            <option>other</option>
+        </select>
+        <input type="number" name="code"/>
+        <input type="text" name="studyField"/>
+        <button>Send</button>
         </form>
     </body>
     `);
