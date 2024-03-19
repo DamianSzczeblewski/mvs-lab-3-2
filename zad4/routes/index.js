@@ -1,9 +1,12 @@
+const home = require("./views/home");
+const student = require("./views/student");
+
 function handleHome() {
-    return views/home.renderPage();
+    return home.renderPage();
 }
 
 function handleStudent() {
-    return views/student.renderPage();
+    return student.renderPage();
 }
 
 module.exports = {
