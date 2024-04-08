@@ -1,43 +1,65 @@
 const http = require("http");
 const fs = require("fs");
 
-const home = require("./views/home");
-const student = require("./views/student");
+const routes = require("./routes/index");
+
+let data = {
+  code: "",
+  name: "",
+  lastname: "",
+  gender: "",
+  age: "",
+  studyField: "",
+};
 
 const PORT = 3000;
 
 const server = http.createServer(requestListener);
 
 function requestListener(request, response) {
-    const { url, method } = request;
+    const { url } = request;
 
     if (url === "/") {
-        home.renderPage(response);
+        response.setHeader("Content-Type", "text/html");
+        response.write(routes.handleHome());
+        response.end();
+        return;
     }
 
-    else if (url === "/student" && method === "POST") {
+    if (url === "/student" && method === "POST") {
         const body = [];
+        
         request.on("data", (chunk) => {
             body.push(chunk);
         });
         return request.on("end", () => {
-            const parsedBody = Buffer.concat(body).toString();
-            const message = parsedBody.split("=")[1].replace("+", " ");
-            fs.writeFileSync("message.txt", message);
-            student.renderPage(response);
+            const parsedBody = Buffer.concat(body).toString().replaceAll("=", ":");
+            parsedBody.split("&").forEach((element) => {
+                const splittedElement = element.split(":");
+                const key = splittedElement[0];
+                const value = splittedElement[1];
+                data[key] = value;
+            });
+            fs.writeFileSync(`${data.code}.txt`, parsedBody.replaceAll("&", "\n"));
+            response.statusCode = 302;
+            response.setHeader("Location", "/student");
+            response.end();
         });
     }
 
-    else {
-        response.statuscode = 404;
+    if (url === "/student") {
         response.setHeader("Content-Type", "text/html");
-        response.write("<html>");
-        response.write("<head><title>404</title></head>");
-        response.write("<body>404 Not Found</body>");
-        response.write("</html>");
+        response.write(routes.handleStudent(data));
+        response.end();
+        return;
     }
-
-    console.log(`Server is running on ${PORT}`);
+    
+    response.statusCode = 404;
+    response.setHeader("Content-Type", "text/html");
+    response.write("404 Not Found");
+    response.end();
 }
 
-server.listen(PORT);
+server.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
+});
