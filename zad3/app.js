@@ -1,7 +1,6 @@
 const http = require("http");
 
-const home = require("./views/home");
-const student = require("./views/student");
+const routes = require("./routes/index");
 
 const PORT = 3000;
 
