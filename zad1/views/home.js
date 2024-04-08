@@ -1,21 +1,18 @@
-function renderPage(response) {
-    response.setHeader("Content-Type", "text/html");
-    response.write(`<html lang="pl">`);
-    response.write(`
-    <head>
-        <meta charset="UFT-8">
-        <meta name="viewport" content="width, initial-scale=1.0">
-        <title>home</title>
-    </head>
-    `);
-    response.write(`
-    <body>
-        <div>home</div>
-    </body>
-    `);
-    response.write("</html>");
-    return response.end();
-}
+const renderPage = () => {
+  return `
+      <!DOCTYPE html>
+      <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>HOME</title>
+          </head>
+          <body>
+              <div>HOME</div>
+          </body>
+      </html>
+      `;
+};
 
 module.exports = {
     renderPage,
