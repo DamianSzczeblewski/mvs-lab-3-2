@@ -1,33 +1,48 @@
-function renderPage(response) {
-    response.setHeader("Content-Type", "text/html");
-    response.write(`<html lang="pl">`);
-    response.write(`
-    <head>
-        <meta charset="UFT-8">
-        <meta name="viewport" content="width, initial-scale=1.0">
-        <title>home</title>
-    </head>
-    `);
-    response.write(`
-    <body>
-        <form action="/student" method="POST">
-        <input type="text" name="name"/>
-        <input type="text" name="lastname"/>
-        <input type="number" name="age"/>
-        <select name="gender">
-            <option>male</option>
-            <option>female</option>
-            <option>other</option>
-        </select>
-        <input type="number" name="code"/>
-        <input type="text" name="studyField"/>
-        <button>Send</button>
-        </form>
-    </body>
-    `);
-    response.write("</html>");
-    return response.end();
-}
+const renderPage = () => {
+  return `
+      <!DOCTYPE html>
+      <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>HOME</title>
+          </head>
+          <body>
+              <form action="/" method="POST">
+                  <div>
+                      <label for="name">Name</label>
+                      <input type="text" name="name" />
+                  </div>
+                  <div>
+                      <label for="lastname">Lastname</label>
+                      <input type="text" name="lastname" />
+                  </div>
+                  <div>
+                      <label for="name">Age</label>
+                      <input type="number" name="age" />
+                  </div>
+                  <div>
+                      <label for="gender">Gender</label>
+                      <select name="gender">
+                          <option value="male">male</option>
+                          <option value="female">female</option>
+                          <option value="other">other</option>
+                      </select>
+                  </div>
+                  <div>
+                      <label for="name">Student code</label>
+                      <input type="number" name="code" />
+                  </div>
+                  <div>
+                      <label for="name">Study field</label>
+                      <input type="text" name="studyField" />
+                  </div>
+                  <button>Send</button>
+              </form>
+          </body>
+      </html>
+      `;
+};
 
 module.exports = {
     renderPage,
